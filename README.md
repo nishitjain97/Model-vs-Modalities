@@ -12,6 +12,6 @@ SBU CSE 512 Final Project to compare model performance for different data modali
 
 ## Useful Tips
 
-* Code/utilities.py contains utility functions that can be used across the codebase. This includes:
+* Code/utilities.py contains utility functions that can be used across the codebase. Utilites can be used in any code by simply running `import utilities as util` and then calling required functions with `util.`, e.g., `util.data_integration()`. Functions include:
 
   * data_integration() function will integrate differentiated data. For diff_1 data, pass the data through this function once to remove differencing. For diff_2 data, passing through function once will remove second differencing and passing the updated data again through the function will remove first differencing.
