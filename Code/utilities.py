@@ -2,6 +2,7 @@ from statsmodels.tsa.stattools import adfuller
 from statsmodels.tools.eval_measures import rmse, aic
 from statsmodels.tsa.vector_ar.vecm import coint_johansen
 import pandas as pd
+import numpy as np
 
 def data_differencing(data):
     seed_row = data.iloc[0:1, :]
@@ -67,3 +68,12 @@ def cointegration_test(df, alpha=0.05):
     print('Name   ::  Test Stat > C(95%)    =>   Signif  \n', '--'*20)
     for col, trace, cvt in zip(df.columns, traces, cvts):
         print(adjust(col), ':: ', adjust(round(trace, 2), 9), '>', adjust(cvt, 8), ' =>  ', trace > cvt)
+
+def rmspe(forecasted_df, true_df):
+    EPSILON =  1e-10
+    rmspe_values = {}
+    
+    for column in forecasted_df.columns:
+        rmspe_values[column] = (np.sqrt(np.mean(np.square((true_df[column] - forecasted_df[column]) / (true_df[column] + EPSILON))))) * 100
+        
+    return rmspe_values
